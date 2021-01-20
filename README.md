@@ -1,4 +1,4 @@
-# recipe-finder
+# recipes-finder
 
 > A Vue.js project
 
