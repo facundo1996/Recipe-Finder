@@ -12,12 +12,17 @@
           <!-- Ingredients -->
           <div>
             <h3>Ingredients</h3>
-            <input type="text" placeholder="Ingredient">
-            <button type="submit">Add ingredient</button>
+            <input type="text" placeholder="Ingredient" id="input_ingredient">
+            <button v-on:click="addIngredient" type="submit">Add ingredient</button>
+            <ul>
+              <li v-for="ingredient in ingredients">
+                {{ingredient}}
+              </li>
+            </ul>
           </div>
 
           <!-- Sweet or salty -->
-          <div>
+          <!-- <div>
               <div>
                 <input type="radio" name="radio-group" id="Sweet" value="Sweet">
                 <label for="js" class="radio-label">Sweet</label>
@@ -26,9 +31,9 @@
                 <input type="radio" name="radio-group" id="Salty" value="Salty">
                 <label for="tricky">Salty</label>
               </div>
-          </div>
+          </div> -->
 
-          <button type="submit">Add Recipe</button>
+          <button v-on:click="addRecipe" type="submit">Add Recipe</button>
 
         </form>
     </div>
@@ -43,6 +48,7 @@ export default {
       visible_button: true,
       seen_p: false,
       recipe: [],
+      ingredients:[],
       recipes: [],
     }
   },
@@ -58,9 +64,26 @@ export default {
         this.recipe.push(input_name.value)
         console.log(this.recipe)
       }
-      
-    }
+    },
+    addIngredient(){
+      this.ingredients.push(input_ingredient.value)
+      input_ingredient.value = ""
+      console.log(this.ingredients)
+    },
+    addRecipe(){
+      this.recipe.push(this.ingredients)
+      this.recipes.push(this.recipe)
 
+      this.seen_input_name = true
+      this.visible_button = true
+      this.seen_p = false
+
+      this.recipe=[]
+      this.ingredients=[]
+
+      console.log(this.recipes)
+    }
+    
   }
 }
 
