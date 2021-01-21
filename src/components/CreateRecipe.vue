@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="div_CreateRecipe">
         <h2>Create new recipe</h2>
         <form>
           <!-- Recipe Name -->
@@ -34,8 +34,9 @@
 
           <br>
           <br>
-          <input type="text" placeholder="Url Image">
-          <img src='url_image'>
+          <input v-model="url_image" type="text" placeholder="Url Image">
+          <button v-on:click="Add_image">Add image</button>
+          <img :src="url_image">
 
           <br>
           <br>
@@ -57,6 +58,9 @@ export default {
 
       value_recipe_name :'',
       value_ingredient: '',
+
+      /* Image */
+      url_image:'',
 
       recipe: [],
       ingredients:[],
@@ -134,6 +138,10 @@ export default {
       this.value_ingredient = ""
       console.log(this.ingredients)
     },
+    Add_image(){
+      console.log(this.url_image)
+
+    },
     addRecipe(){
       this.recipe.push(this.ingredients)
 
@@ -142,6 +150,7 @@ export default {
       }else{
         this.recipe.push("Sweet")
       }
+      this.recipe.push(this.url_image)
 
       this.recipes.push(this.recipe)
 
@@ -212,6 +221,7 @@ export default {
 .active .toggle__switch::after {
     left: 23px;
 }
+
 
 
 
