@@ -35,7 +35,6 @@
           <br>
           <br>
           <input v-model="url_image" type="text" placeholder="Url Image">
-          <button v-on:click="Add_image">Add image</button>
           <img :src="url_image">
 
           <br>
@@ -44,12 +43,20 @@
           <button v-on:click="addRecipe" type="submit">Add Recipe</button>
 
         </form>
+
+        <br>
+        <br>
+        <RecipeFinder :total_recipes="recipes" />
     </div>
 </template>
 
 <script>
+import RecipeFinder from './RecipesFinder'
 export default {
   name: 'CreateRecipe',
+  components:{
+    RecipeFinder
+  },
   data () {
     return{
       seen_input_name: true,
@@ -129,6 +136,7 @@ export default {
         this.visible_button = false
         this.seen_p = true
         this.recipe.push(this.value_recipe_name)
+        this.value_recipe_name = ""
         console.log(this.recipe)
       }
       console.log(this.valor_input)
@@ -137,10 +145,6 @@ export default {
       this.ingredients.push(this.value_ingredient)
       this.value_ingredient = ""
       console.log(this.ingredients)
-    },
-    Add_image(){
-      console.log(this.url_image)
-
     },
     addRecipe(){
       this.recipe.push(this.ingredients)
@@ -151,6 +155,7 @@ export default {
         this.recipe.push("Sweet")
       }
       this.recipe.push(this.url_image)
+      this.url_image = ""
 
       this.recipes.push(this.recipe)
 
