@@ -6,13 +6,13 @@
           <div>
             <input  v-if="seen_input_name" v-model="value_recipe_name" type="text" placeholder="Recipe name" id="input_name">
             <button v-if="visible_button" v-on:click="create_recipe">Create recipe</button>
-            <p v-if="seen_p">{{recipe[0]}}</p>
+            <h3 v-if="seen_p">{{recipe[0]}}</h3>
           </div>
 
           <!-- Ingredients -->
           <div>
-            <h3>Ingredients</h3>
-            <input type="text" v-model="value_ingredient" placeholder="Ingredient">
+            <h2>Ingredients</h2>
+            <input type="text" v-model="value_ingredient" placeholder="Ingredient" id="input_ingredient">
             <button v-on:click="addIngredient" type="submit">Add ingredient</button>
             <ul>
               <li v-for="ingredient in ingredients">
@@ -35,7 +35,10 @@
           <br>
           <br>
           <input v-model="url_image" type="text" placeholder="Url Image">
-          <img :src="url_image">
+          <img :src="url_image" id="images" srcset="">
+          <p>
+          
+          </p>
 
           <br>
           <br>
@@ -142,9 +145,18 @@ export default {
       console.log(this.valor_input)
     },
     addIngredient(){
-      this.ingredients.push(this.value_ingredient)
-      this.value_ingredient = ""
-      console.log(this.ingredients)
+      if(this.recipe.length == 0){
+        input_name.style.background="pink"
+      }
+      else if(this.value_ingredient.length == 0){
+        input_ingredient.style.background="pink"
+      }
+      else{
+        input_ingredient.style.background="white"
+        this.ingredients.push(this.value_ingredient)
+        this.value_ingredient = ""
+      }
+      
     },
     addRecipe(){
       this.recipe.push(this.ingredients)
