@@ -1,22 +1,19 @@
 <template>
 
     <div>
+        <h2 class="h2_h2"><u>Find a recipe</u></h2>
         <form>
-            <input type="text" v-model="searcher_value" placeholder="Look for your recipe">
+            <input type="text" v-model="searcher_value" placeholder="Look for your recipe...">
             <input type="submit" v-on:click="Search" value="Search">
         </form>
         <br>
         <fieldset>
             <label v-for="(search, index) in search_list">
-                
                 <input :id="index + '_id_search'" type="checkbox" v-on:click="Search_confirm(search,index)">
                 {{search.name}}
                 <button v-on:click="deleteT(search)">Delete</button>
-                
             </label>
         </fieldset>
-        
-        <br>
         <!-- Salty or Sweet -->
         <label :for="id + '_button2'" :class="{'active': isActive}" class="toggle__button">
             <span class="toggle__label">{{ enableText }}</span>
@@ -211,7 +208,19 @@ export default {
 }
 </script>
 <style>
+.h2_h2{
+    font-family: 'Signika', sans-serif;
+    font-size: 3rem;
+}
+@media (max-width: 740px){
+  .h2_h2{
+      text-align: center;
+      margin-top: 35px;
+      margin-bottom: 40px;
+    
+  }
+}
 img{
-    width: 150px;
+    width: 200px;
 }
 </style>

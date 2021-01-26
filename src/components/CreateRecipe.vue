@@ -1,54 +1,43 @@
 <template>
-    <div class="div_CreateRecipe">
-        <h2>Create new recipe</h2>
-        <form>
+    <div class="mt-5 div_CreateRecipe">
+        <h2 class="h2_h2"><u>Create new recipe</u></h2>
+        <form class="form_createRecipe">
           <!-- Recipe Name -->
           <div>
-            <input  v-if="seen_input_name" v-model="value_recipe_name" type="text" placeholder="Recipe name" id="input_name">
-            <button v-if="visible_button" v-on:click="create_recipe">Create recipe</button>
-            <h3 v-if="seen_p">{{recipe[0]}}</h3>
+            <h3 class="h3_h3">Recipe Name</h3>
+            <input class="form-control mt-2 mb-3 font_input"  v-if="seen_input_name" v-model="value_recipe_name" type="text" placeholder="Recipe name..." id="input_name">
+            <button class="btn btn_create" v-if="visible_button" v-on:click="create_recipe">Create recipe</button>
+            <p class="name_recipe" v-if="seen_p">{{recipe[0]}}</p>
           </div>
 
           <!-- Ingredients -->
           <div>
-            <h2>Ingredients</h2>
-            <input type="text" v-model="value_ingredient" placeholder="Ingredient" id="input_ingredient">
-            <button v-on:click="addIngredient" type="submit">Add ingredient</button>
-            <ul>
-              <li v-for="ingredient in ingredients">
+            <h3 class="h3_h3 mt-5">Ingredients</h3>
+            <input class="my-2 form-control font_input" type="text" v-model="value_ingredient" placeholder="Ingredient..." id="input_ingredient">
+            <button class="btn btn_create" v-on:click="addIngredient" type="submit">Add ingredient</button>
+            <ul class="list_ingredients">
+              <li class="pt-2" v-for="ingredient in ingredients">
                 {{ingredient}}
               </li>
             </ul>
           </div>
 
-          <br>
-          <br>
-
           <!-- Salty or Sweet -->
-          <label :for="id + '_button'" :class="{'active': isActive}" class="toggle__button">
-            <span class="toggle__label">{{ enableText }}</span>
+          <label :for="id + '_button'" :class="{'active': isActive}" class="toggle__button pb-4">
             <input type="checkbox" :disabled="disabled" :id="id + '_button'" v-model="checkedValue">
+            <span class="Salty_Sweet toggle__label">{{ enableText }}</span><img class="mx-2" src="../styles/sal.png">
             <span class="toggle__switch"></span>
-            <span class="toggle__label">{{ disabledText }}</span>     
+            <img class="mx-2" src="../styles/sugar.png">
+            <span class="Salty_Sweet toggle__label">{{ disabledText }}</span>     
           </label>
 
-          <br>
-          <br>
-          <input v-model="url_image" type="text" placeholder="Url Image">
-          <img :src="url_image" id="images" srcset="">
-          <p>
-          
-          </p>
-
-          <br>
-          <br>
-
-          <button v-on:click="addRecipe" type="submit">Add Recipe</button>
+          <div class="div_image">
+            <input class="form-control font_input"  v-model="url_image" type="text" placeholder="Url Image...">
+            <img class="mt-3" :src="url_image" id="images">
+            <button class="btn btn_create" v-on:click="addRecipe" type="submit">Add Recipe</button>
+          </div>
 
         </form>
-
-        <br>
-        <br>
         <RecipeFinder :total_recipes="recipes" />
     </div>
 </template>
@@ -159,25 +148,30 @@ export default {
       
     },
     addRecipe(){
-      this.recipe.push(this.ingredients)
-
-      if (this.currentState === false) {
-        this.recipe.push("Salty")
-      }else{
-        this.recipe.push("Sweet")
+      if(this.recipe.length == 0){
+        input_name.style.background="pink"
       }
-      this.recipe.push(this.url_image)
-      this.url_image = ""
+      else{
+        this.recipe.push(this.ingredients)
 
-      this.recipes.push(this.recipe)
+        if (this.currentState === false) {
+          this.recipe.push("Salty")
+        }else{
+          this.recipe.push("Sweet")
+        }
+        this.recipe.push(this.url_image)
+        this.url_image = ""
 
-      this.seen_input_name = true
-      this.visible_button = true
-      this.seen_p = false
+        this.recipes.push(this.recipe)
 
-      this.recipe=[]
-      this.ingredients=[]
-      console.log(this.recipes)
+        this.seen_input_name = true
+        this.visible_button = true
+        this.seen_p = false
+
+        this.recipe=[]
+        this.ingredients=[]
+        console.log(this.recipes)
+      }
 
     },
     
@@ -187,6 +181,66 @@ export default {
 </script>
 
 <style>
+.h3_h3{
+  font-family: 'Signika', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+.form_createRecipe{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form_createRecipe div{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+.btn_create{
+  background-color: #df7861;
+  font-family: 'Rubik', sans-serif;
+}
+.btn_create:hover{
+  background-color: #ecb390;
+}
+.name_recipe{
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: bold;
+}
+.list_ingredients{
+  margin-left: 20px;
+  margin-top: 10px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 25px;
+  list-style: none;
+}
+.list_ingredients li{
+  background-image: url(../styles/zanahoria.png);
+  background-size: 25px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-bottom: 5px;
+}
+.div_image{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.div_image button{
+  width: 300px;
+  margin-top: 20px;
+}
+.font_input{
+  font-family: 'Rubik', sans-serif;
+}
+
+
+
 /* <!-- Salty or Sweet --> */
 .toggle__button {
     vertical-align: middle;
@@ -239,6 +293,19 @@ export default {
     left: 23px;
 }
 
+.titlefont{
+  font-family: 'Signika', sans-serif;
+  
+}
+.Salty_Sweet{
+  font-size: 20px;
+  font-family: 'Rubik', sans-serif;
+
+}
+.toggle__button img{
+  width: 35px;
+  height: 35px;
+}
 
 
 
