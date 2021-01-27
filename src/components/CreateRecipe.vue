@@ -1,6 +1,6 @@
 <template>
     <div class="mt-5 div_CreateRecipe">
-        <h2 class="h2_h2"><u>Create new recipe</u></h2>
+        <h2 class="h2_h2 my-3"><u>Create new recipe</u></h2>
         <form class="form_createRecipe">
           <!-- Recipe Name -->
           <div>
@@ -27,8 +27,7 @@
             <input type="checkbox" :disabled="disabled" :id="id + '_button'" v-model="checkedValue">
             <span class="Salty_Sweet toggle__label">{{ enableText }}</span><img class="mx-2" src="../styles/sal.png">
             <span class="toggle__switch"></span>
-            <img class="mx-2" src="../styles/sugar.png">
-            <span class="Salty_Sweet toggle__label">{{ disabledText }}</span>     
+            <img class="mx-2" src="../styles/sugar.png"><span class="Salty_Sweet toggle__label">{{ disabledText }}</span>     
           </label>
 
           <div class="div_image">
@@ -38,6 +37,7 @@
           </div>
 
         </form>
+        <h2 class="h2_h2 my-5"><u>Find a recipe</u></h2>
         <RecipeFinder :total_recipes="recipes" />
     </div>
 </template>
@@ -55,7 +55,7 @@ export default {
       visible_button: true,
       seen_p: false,
 
-      value_recipe_name :'',
+      value_recipe_name : '',
       value_ingredient: '',
 
       /* Image */
@@ -98,21 +98,21 @@ export default {
   // <!-- Salty or Sweet -->
     computed: {
         isActive() {
-            return this.currentState;
+          return this.currentState;
         },
         enableText() {
-            return this.labelEnableText;
+          return this.labelEnableText;
         },
         disabledText() {
-            return this.labelDisableText;
+          return this.labelDisableText;
         },
         checkedValue: {
             get() {
-                return this.currentState;
+              return this.currentState;
             },
             set(newValue) {
-                this.currentState = newValue;
-                this.$emit('change', newValue);
+              this.currentState = newValue;
+              this.$emit('change', newValue);
             }
         }
     },
@@ -131,7 +131,6 @@ export default {
         this.value_recipe_name = ""
         console.log(this.recipe)
       }
-      console.log(this.valor_input)
     },
     addIngredient(){
       if(this.recipe.length == 0){
@@ -159,7 +158,7 @@ export default {
         }else{
           this.recipe.push("Sweet")
         }
-        this.recipe.push(this.url_image)
+        this.recipe.push(this.url_image || 'https://thumbs.dreamstime.com/b/no-image-available-icon-vector-illustration-flat-design-140476186.jpg')
         this.url_image = ""
 
         this.recipes.push(this.recipe)
@@ -185,6 +184,17 @@ export default {
   font-family: 'Signika', sans-serif;
   font-size: 2rem;
   text-align: center;
+}
+.h2_h2{
+  font-family: 'Signika', sans-serif;
+  font-size: 3rem;
+}
+@media (max-width: 740px){
+  .h2_h2{
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 40px;
+  }
 }
 .form_createRecipe{
   display: flex;
@@ -214,7 +224,7 @@ export default {
   margin-left: 20px;
   margin-top: 10px;
   font-family: 'Rubik', sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   list-style: none;
 }
 .list_ingredients li{
@@ -240,49 +250,47 @@ export default {
 }
 
 
-
 /* <!-- Salty or Sweet --> */
 .toggle__button {
-    vertical-align: middle;
-    user-select: none;
-    cursor: pointer;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
 }
 .toggle__button input[type="checkbox"] {
-    opacity: 0;
-    position: absolute;
-    width: 1px;
-    height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
 }
 .toggle__button .toggle__switch {
-    display:inline-block;
-    height:12px;
-    border-radius:6px;
-    width:40px;
-    background: #adedcb;
-    box-shadow: inset 0 0 1px #53B883;
-    position:relative;
-    margin-left: 10px;
-    transition: all .25s;
+  display:inline-block;
+  height:12px;
+  border-radius:6px;
+  width:40px;
+  background: #adedcb;
+  box-shadow: inset 0 0 1px #53B883;
+  position:relative;
+  margin-left: 10px;
+  transition: all .25s;
 }
 .toggle__button .toggle__switch::after, 
 .toggle__button .toggle__switch::before {
-    content: "";
-    position: absolute;
-    display: block;
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    left: 0;
-    top: -3px;
-    transform: translateX(0);
-    transition: all .25s cubic-bezier(.5, -.6, .5, 1.6);
+  content: "";
+  position: absolute;
+  display: block;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  left: 0;
+  top: -3px;
+  transform: translateX(0);
+  transition: all .25s cubic-bezier(.5, -.6, .5, 1.6);
 }
 .toggle__button .toggle__switch::after {
-    background: #53B883;
-    box-shadow: 0 0 1px #53B883;
+  background: #53B883;
+  box-shadow: 0 0 1px #53B883;
 }
 .toggle__button .toggle__switch::before {
-    
     opacity:0;
 }
 .active .toggle__switch::after,
@@ -290,7 +298,7 @@ export default {
   transform:translateX(40px - 18px);
 }
 .active .toggle__switch::after {
-    left: 23px;
+  left: 23px;
 }
 
 .titlefont{

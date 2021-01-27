@@ -7,6 +7,9 @@
     <div class="container">
       <CreateRecipe/>
     </div>
+    <footer class="footer">
+      <img src="./styles/cocinero.png">
+    </footer>
   </div>
 </template>
 
@@ -28,7 +31,7 @@ h1{
   font-size: 4rem; 
 }
 .body{
-    background-color: #d4e2d4;
+  background-color: #d4e2d4;
 }
 .titlefont{
   display: flex;
@@ -47,6 +50,23 @@ h1{
   .titlefont img{
     display:none;
   }
+}
+
+.footer{
+  margin-top: 200px;
+  height: 90px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ecb390;
+  border-top: #fcf8e8 solid;
+  border-top-right-radius: 30% ;
+  border-top-left-radius: 30%;
+}
+.footer img{
+  width: 70px;
+  height: 70px;
 }
 
 </style>
