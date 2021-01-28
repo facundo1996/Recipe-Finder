@@ -183,7 +183,7 @@ export default {
                 let addi = 0
                 for(let x=0 ; this.search_list_confirm[x]; x++){
                     add = true
-                    if(this.total_recipes[i][0].indexOf(this.search_list_confirm[x]) == -1){
+                    if(this.total_recipes[i][0].toLowerCase().indexOf(this.search_list_confirm[x].toLowerCase()) == -1){
                         add = false
                         continue
                     }
@@ -193,7 +193,7 @@ export default {
                 }
                 for(let x=0 ; this.search_list_confirm[x]; x++){
                     for(let t = 0; this.total_recipes[i][1][t] ; t++){
-                        if(this.total_recipes[i][1][t] == this.search_list_confirm[x]){
+                        if(this.total_recipes[i][1][t].toLowerCase() == this.search_list_confirm[x].toLowerCase()){
                             addi = addi + 1
                         }
                     }
